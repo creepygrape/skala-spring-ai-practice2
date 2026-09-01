@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: practice2
+
+  profiles:
+    default: dev
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+
+  ai:
+    model:
+      chat: openai
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      chat:
+        options:
+          model: gpt-4o-mini
+          temperature: 0.7
+          max-tokens: 1024
+    retry:
+      max-attempts: 3
+      backoff:
+        initial-interval: 1s
+        multiplier: 2
+        max-interval: 10s
+
+chatbot:
+  memory:
+    max-messages: 20
+  quota:
+    daily-limit: 100
+
+jwt:
+  secret: ${JWT_SECRET}
+  access-token-validity: 1h
