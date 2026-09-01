@@ -21,10 +21,11 @@ public class ChatService {
 
     public Flux<String> streamChat(String userId, String sessionId, String message) {
         Timer.Sample sample = Timer.start(meterRegistry);
+        String conversationId = userId + ":" + sessionId;
         return chatClient
                 .prompt()
                 .user(message)
-                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, sessionId))
+                .advisors(a -> a.param(ChatMemory.CONVERSATION_ID, conversationId))
                 .stream()
                 .content()
                 .doOnComplete(() -> {

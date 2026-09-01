@@ -32,7 +32,7 @@ chatbot:
     max-messages: 20
   quota:
     daily-limit: 100
-
-jwt:
-  secret: ${JWT_SECRET}
-  access-token-validity: 1h
+  anonymous:
+    cookie-name: chatbot_visitor
+    cookie-max-age: 30d
+    secure: ${CHATBOT_COOKIE_SECURE:false}
